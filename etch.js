@@ -12,23 +12,28 @@ createNewGrid();
 resetGridToDefault();
 
 
-function createDefaultGridSize(numOfSq){
+function createDefaultGridSize(numOfSq) {
     for (let i = 0; i < (numOfSq ** 2); i++) {
-                squares = document.createElement('div');
-                squares.setAttribute('class', 'grid');
-                squares.setAttribute('style', `height:${containerSize / numOfSq}px;width:${containerSize / numOfSq}px`);
-                gridContainer.setAttribute('style', `display: grid; grid-template-columns: repeat(${numOfSq}, 1fr)`);
-                gridContainer.appendChild(squares);
+        squares = document.createElement('div');
 
-                squares.addEventListener('mouseleave', () => {
-                    squares.setAttribute('style', `background-color: rgb(150, 10, 10)`)
-                })
+        squares.setAttribute('class', 'grid');
+        squares.setAttribute('style', `height:${containerSize / numOfSq}px;width:${containerSize / numOfSq}px`);
+        gridContainer.setAttribute('style', `display: grid; grid-template-columns: repeat(${numOfSq}, 1fr)`);
+        gridContainer.appendChild(squares);
+
+
     };
-    
+    document.querySelectorAll('.grid').forEach(square => {
+        square.addEventListener('mouseleave', () => {
+            square.setAttribute('style', `background-color: rgb(230, 110, 210)`)
+        })
+    });
 };
 
 
-function createNewGrid(){
+
+
+function createNewGrid() {
     gridSizeBtn.addEventListener('click', () => {
         gridContainer.innerHTML = '';
         createDefaultGridSize(prompt('how many squares per side?'))
@@ -36,15 +41,9 @@ function createNewGrid(){
 };
 
 
-function resetGridToDefault (){
+function resetGridToDefault() {
     resetBtn.addEventListener('click', () => {
         gridContainer.innerHTML = '';
         createDefaultGridSize(16);
     });
 };
-
-
-
-   
-    
-    
