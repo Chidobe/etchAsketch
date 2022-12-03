@@ -35,6 +35,7 @@ body {
 }
 
 
+
 /* .grid:hover {
 background-color: #F15139;
 } */
@@ -56,4 +57,9 @@ button {
     color: #F8F8F8;
     font-size: 1rem;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.slider-value, .slider{
+    color: #F15139;
+    margin: 0px;
 }
