@@ -1,9 +1,9 @@
 //ETCH A SKETCH
 
 const gridContainer = document.querySelector('.grid-container');
-let containerSize = gridContainer.clientWidth
-const blackGridColor = document.querySelector('.black-grid-color');
+const blackGridColorBtn = document.querySelector('.black-grid-color');
 const resetBtn = document.querySelector('.reset');
+let containerSize = gridContainer.clientWidth;
 let squares;
 let slider = document.querySelector('.slider');
 sliderValueOutput = document.querySelector('.slider-value');
@@ -24,7 +24,22 @@ function createDefaultGridSize(numOfSq) {
         gridContainer.appendChild(squares);
 
     };
-    // Adds an event listener to each square in the grid and sets its style value when the mouse enters the div
+    styleGridRandomColor();
+};
+
+
+//Allows user to choose number of squares per side of the grid
+function createNewGrid() {
+    slider.addEventListener('input', () => {
+        gridContainer.innerHTML = '';
+        createDefaultGridSize(slider.value);
+        sliderValueOutput.textContent = `Grid Size: ${slider.value} X ${slider.value}`
+    })
+};
+
+
+// Adds an event listener to each square in the grid and sets a random background color value when the mouse enters the div
+function styleGridRandomColor() {
     let allSquares = document.querySelectorAll('.grid');
     allSquares.forEach(square => {
         square.addEventListener('mouseenter', () => {
@@ -34,36 +49,45 @@ function createDefaultGridSize(numOfSq) {
 };
 
 
+// Generates random rgb() color values
+function randomRgbValue() {
+    let rgbValue = [255, 255, 255];
+    let randomRgb = rgbValue.map(val => Math.round(Math.random() * val));
+    return randomRgb;
+};
+
+
+
+// // Adds an event listener to each square in the grid and sets a shade of black background color value when the mouse enters the div
+// function styleGridBlack() {
+//     let allSquares = document.querySelectorAll('.grid');
+//     allSquares.forEach(square => {
+//         square.addEventListener('mouseenter', () => {
+//             square.style.backgroundColor = `rgb(${shadesOfBlack()})`
+//         })
+//     });
+// };
+
+// // Generates shades of black rgb() color values
+// function shadesOfBlack(){
+//     let rgbValue = [255, 255, 255];
+    
+//     let shadeOfBlackRgb = rgbValue.map(val => val - 25);
+//     while (val > 25){
+//     rgbValue = shadeOfBlackRgb;
+//     return shadeOfBlackRgb;
+//     };
+//  };
+
+
+
+
 // Resets the num of squares per side to default
 function resetGridToDefault() {
     resetBtn.addEventListener('click', () => {
         gridContainer.innerHTML = '';
-        createDefaultGridSize(20);
+        slider.value = 20;
+        sliderValueOutput.textContent = `Grid Size: ${slider.value} X ${slider.value}`
+        createDefaultGridSize(slider.value);
     });
 };
-
-// Generates random rgb() color values
-function randomRgbValue() {
-    let r = Math.round(Math.random() * 255);
-    let g = Math.round(Math.random() * 255);
-    let b = Math.round(Math.random() * 255);
-    return [r, g, b];
-};
-
-//Allows user to choose number of squares per side of the grid
-function createNewGrid() {
-    slider.addEventListener('input', () => {
-        gridContainer.innerHTML = '';
-        createDefaultGridSize(slider.value);
-        sliderValueOutput.textContent = `Grid: ${slider.value} X ${slider.value}`
-    })
-};
-
-
-//Allows user to choose number of squares per side of the grid
-// function createNewGrid() {
-//     gridSizeBtn.addEventListener('click', () => {
-//         gridContainer.innerHTML = '';
-//         createDefaultGridSize(slider.value)
-//     })
-// }; find something else to do with this button!!!!!
